@@ -40,15 +40,16 @@ char	*get_good(char **str, char **line)
 		temp = ft_strdup(&((*str)[i + 1]));
 		free(*str);
 		*str = temp;
+		return (*line);
 	}
-	else
+	else if ((*str)[i] == '\0' && i > 0)
 	{
 		*line = ft_strdup(*str);
 		free(*str);
 		*str = NULL;
-		return (NULL);
+		return (*line);
 	}
-	return (*line);
+	return (NULL);
 }
 
 char	*get_next_line(int fd)
