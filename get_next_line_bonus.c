@@ -1,5 +1,14 @@
 #include "get_next_line_bonus.h"
 
+void	freestr(char **str)
+{
+	if (str || *str)
+	{
+		free(*str);
+		*str = NULL;
+	}
+}
+
 void	*ft_memset(void *b, int c, size_t len)
 {
 	size_t	index;
@@ -38,17 +47,18 @@ char	*get_good(char **str, char **line)
 	{
 		*line = ft_substr(*str, 0, i);
 		temp = ft_strdup(&((*str)[i + 1]));
-		free(*str);
+		freestr(str);
 		*str = temp;
 		return (*line);
 	}
 	else if ((*str)[i] == '\0' && i > 0)
 	{
 		*line = ft_strdup(*str);
-		free(*str);
+		freestr(str);
 		*str = NULL;
 		return (*line);
 	}
+	freestr(str);
 	return (NULL);
 }
 
@@ -72,7 +82,7 @@ char	*get_next_line(int fd)
 			str[fd] = ft_calloc(1, 1);
 		buffer[reader] = '\0';
 		temp = ft_strjoin(str[fd], buffer);
-		free(str[fd]);
+		freestr(&str[fd]);
 		str[fd] = temp;
 	}
 	return (get_good(&str[fd], &line));
