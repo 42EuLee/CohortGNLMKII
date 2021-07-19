@@ -45,7 +45,7 @@ char	*get_good(char **str, char **line)
 		i++;
 	if ((*str)[i] == '\n')
 	{
-		*line = ft_substr(*str, 0, i);
+		*line = ft_substr(*str, 0, i + 1);
 		temp = ft_strdup(&((*str)[i + 1]));
 		freestr(str);
 		*str = temp;
